@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContentExperiments.WebUI", "ContentExperiments.WebUI.csproj", "{665E2CFF-EB9D-42D3-B759-4A20792FDB7F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContentExperiments.HtmlParser", "..\ContentExperiments.HtmlParser\ContentExperiments.HtmlParser.csproj", "{9B76B530-0235-4E2D-8D1D-270A470F9DEA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{665E2CFF-EB9D-42D3-B759-4A20792FDB7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{665E2CFF-EB9D-42D3-B759-4A20792FDB7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{665E2CFF-EB9D-42D3-B759-4A20792FDB7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{665E2CFF-EB9D-42D3-B759-4A20792FDB7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B76B530-0235-4E2D-8D1D-270A470F9DEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B76B530-0235-4E2D-8D1D-270A470F9DEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B76B530-0235-4E2D-8D1D-270A470F9DEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B76B530-0235-4E2D-8D1D-270A470F9DEA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
