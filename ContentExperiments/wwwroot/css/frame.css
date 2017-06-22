@@ -1,0 +1,58 @@
+﻿.hover {
+    opacity: 0.6;
+    background-color: #ffb848 !important;
+}
+
+a.hover {
+    background-image: none !important;
+}
+
+img.hover {
+    border: 1px solid #ffb848;
+}
+
+buton.hover {
+    background-image: none !important;
+    border: 1px solid #ffb848;
+}
+
+.underSelectedRule {
+    opacity: 0.6;
+    background-color: #4b8df8 !important;
+}
+
+a.underSelectedRule {
+    background-image: none !important;
+}
+
+img.underSelectedRule {
+    border: 1px solid #4b8df8;
+}
+
+buton.underSelectedRule {
+    background-image: none !important;
+    border: 1px solid #4b8df8;
+}
+
+.alreadySelected {
+    opacity: 0.6;
+    background-color: #35aa47 !important;
+}
+
+a.alreadySelected {
+    background-image: none !important;
+}
+
+img.alreadySelected {
+    border: 1px solid #35aa47;
+}
+
+buton.alreadySelected {
+    background-image: none !important;
+    border: 1px solid #35aa47;
+}
+
+.scraper-item-block {
+     opacity: 0.6;
+    background-color: #d84a38 !important;
+}

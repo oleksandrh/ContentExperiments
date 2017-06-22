@@ -121,7 +121,7 @@ namespace ContentExperiments.Controllers
                             string oldAttr = href.Value;
                             if (oldAttr.StartsWith("http://") || oldAttr.StartsWith("https://"))
                             {
-                                var newAttr = string.Format("/Scraper/GetUrl?encoding=" + encoding + "&url={0}", oldAttr);
+                                var newAttr = string.Format("/Scrapping/GetUrl?encoding=" + encoding + "&url={0}", oldAttr);
                                 href.Value = newAttr;
                             }
                             else
@@ -134,7 +134,7 @@ namespace ContentExperiments.Controllers
                                 {
                                     oldAttr = "/" + oldAttr;
                                 }
-                                var newAttr = string.Format("/Scraper/GetUrl?encoding=" + encoding + "&url={0}{1}", domain, oldAttr);
+                                var newAttr = string.Format("/Scrapping/GetUrl?encoding=" + encoding + "&url={0}{1}", domain, oldAttr);
                                 href.Value = newAttr;
                             }
                         }
