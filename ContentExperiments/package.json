@@ -43,7 +43,8 @@
     "webpack": "2.5.1",
     "webpack-hot-middleware": "2.18.0",
     "webpack-merge": "4.1.0",
-    "zone.js": "0.8.10"
+    "zone.js": "0.8.10",
+    "ng-block-ui": "0.7.2"
   },
   "devDependencies": {
     "@types/chai": "3.5.2",

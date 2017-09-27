@@ -1,27 +1,28 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import * as $ from 'jquery';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Component({
     selector: 'home',
-    templateUrl: './home.component.html'
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
     src: SafeResourceUrl;
-    @ViewChild('frame') frame: ElementRef;
+    _browserPortlet: String = "#browser-portlet";
+    sanitizerLocal: DomSanitizer;
+
+    @ViewChild('iframe') iframe: any;
+    @BlockUI('frame') blockIFrame: NgBlockUI;
+    
 
     constructor(private sanitizer: DomSanitizer) {
-        this.src = this.sanitizer.bypassSecurityTrustResourceUrl("/Scrapping/GetUrl?encoding=UTF8&url=https://habrahabr.ru/");
+        this.sanitizerLocal = sanitizer;
     }
-
-    highlightHover = function (element) {
-
+    loadPage(url:String) {
+        this.src = this.sanitizerLocal.bypassSecurityTrustResourceUrl(`/Scrapping/GetUrl?encoding=UTF8&url=${url}`);
     }
-
-    unhighlightHover = function (element) {
-
-    }
-
     handlerIn(e) {
         var self = $(this);
         var hover = self.find(".hover");
@@ -46,11 +47,41 @@ export class HomeComponent {
         }
     }
 
+    // browser control
+    blockPortlet() {
+        this.blockIFrame.start('Loading...');
+    }
+
+    unblockPortlet() {
+        this.blockIFrame.stop();
+    }
+
+    reloadPageClick() {
+        this.blockPortlet();
+        $("iframe").get(0).contentDocument.location.reload(true);
+    }
+
+    goBackPageClick() {
+            this.blockPortlet();
+            $("iframe").get(0).contentWindow.history.back();
+    }
+
+    goForwardPageClick() {
+        this.blockPortlet();
+        $("iframe").get(0).contentWindow.history.forward();
+    }
+
     onLoad() {
         $("iframe").contents().find("head")
             .append("<link type='text/css' rel='stylesheet' href='/css/frame.css'>");
         $("iframe").contents().find("*")
             .hover(this.handlerIn, this.handlerOut);
-
+        this.unblockPortlet();
+        $("iframe").contents().click((e) => {
+            e.preventDefault();
+            setTimeout(() => {
+                console.log($("iframe").get(0).contentWindow.location.href); 
+            }, 2000);
+        });
     }
 }

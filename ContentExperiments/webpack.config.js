@@ -9,7 +9,10 @@ module.exports = (env) => {
     const sharedConfig = {
         stats: { modules: false },
         context: __dirname,
-        resolve: { extensions: [ '.js', '.ts' ] },
+        resolve: {
+            extensions: [".ts", ".js", ".json", ".css", ".scss", ".html"],
+            modules: [path.join(__dirname, "node_modules")]
+        },
         output: {
             filename: '[name].js',
             publicPath: '/dist/' // Webpack dev middleware, if enabled, handles requests for this URL prefix

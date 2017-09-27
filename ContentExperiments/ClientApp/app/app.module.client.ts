@@ -4,13 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { sharedConfig } from './app.module.shared';
 
+
 @NgModule({
     bootstrap: sharedConfig.bootstrap,
     declarations: sharedConfig.declarations,
     imports: [
         BrowserModule,
         FormsModule,
-        HttpModule,
+        HttpModule,        
         ...sharedConfig.imports
     ],
     providers: [

@@ -1,1 +1,33 @@
-<iframe style="width:100%;" height="600" [src]="src" (load)="onLoad()" #frame></iframe>
+
+<input type="text" #url>
+<input type="button" value="Load" (click)="loadPage(url.value)">
+<div class="portlet box yellow blue" id="browser-portlet">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-globe"></i>Page
+        </div>
+        <!--<div class="browser-controls actions pull-left">
+            <div class="btn-group btn-group-solid">
+                <button type="button" class="btn btn-sm" (click)="goBackPageClick()"><i class="fa fa-arrow-left"></i></button>
+                <button type="button" class="btn btn-sm" (click)="goForwardPageClick()"><i class="fa fa-arrow-right"></i></button>
+                <button type="button" class="btn btn-sm" (click)="reloadPageClick()"><i class="fa fa-repeat"></i></button>
+            </div>
+        </div>-->
+        <!--<div class="actions">
+            <div class="btn-group">
+                <label class="btn red btn-sm setLink active" (click)="linkModeClick()">
+                    Link Mode
+                </label>
+                <label class="btn red btn-sm setSelect" (click)="selectModeClick()">
+                    Select Mode
+                </label>
+            </div>
+        </div>-->
+    </div>
+    <div class="portlet-body">
+        <div *blockUI="'frame'">
+            <iframe *ngIf="src" style="width:100%;" height="600" [src]="src" (load)="onLoad()" #iframe></iframe>
+        </div>
+    </div>
+</div>
+
