@@ -1,4 +1,5 @@
 import { Component, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import * as $ from 'jquery';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
@@ -87,7 +88,7 @@ export class HomeComponent {
         });
     }
     save(url: String) {
-        $.post("/home/save", { modelA: this.modelA, modelB: this.modelB, page: url }).done(r => {})
+        $.post("/home/save", { selector: this.modelA.selectedElementSelector, modelA: this.modelA.selectedElementHtml, modelB: this.modelB.selectedElementHtml, url: url }).done(r => {})
         //this.http.post("/home/save", JSON.stringify({ modelA: this.modelA, modelB: this.modelB, page: url })).subscribe(r => { });
     }
     getSpecificPath(elem) {

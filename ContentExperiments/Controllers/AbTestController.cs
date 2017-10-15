@@ -6,59 +6,46 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using ContentExperiments.WebUI.Models;
 using Microsoft.AspNetCore.Cors;
+using ContentExperiments.WebUI.Repositories;
+using ContentExperiments.WebUI.Services;
 
 namespace ContentExperiments.Controllers
 {
     [Route("api/[controller]")]
     public class ABTestController : Controller
     {
-        private readonly IHostingEnvironment _hostingEnvironment;
-        public ABTestController(IHostingEnvironment hostingEnvironment)
+        private readonly IABTestsService abTestsService;
+        private readonly IABTestsRepository abTestsRepository;
+        public ABTestController(IABTestsService abTestsService, IABTestsRepository abTestsRepository)
         {
-            _hostingEnvironment = hostingEnvironment;
+            this.abTestsService = abTestsService;
+            this.abTestsRepository = abTestsRepository;
         }
         [HttpGet("[action]")]
-        public JavaScriptResult GetJs(int id)
+        public JavaScriptResult GetJs(string userId)
         {
-            string webRootPath = _hostingEnvironment.WebRootPath;
-
-            string result = System.IO.File.ReadAllText(webRootPath + "/JavaScript.js");
-            using (var context = new ABContext())
-            {
-                var abtest = context.ABTests.FirstOrDefault(x => x.Id == id);
-                result = result.Replace("@selector", "'" + abtest.Selector + "'");
-                result = result.Replace("@htmlA", "'" + abtest.HtmlA + "'");
-                result = result.Replace("@htmlB", "'" + abtest.HtmlB + "'");
-                result = result.Replace("@pageviews", abtest.PageViews.ToString());
-                result = result.Replace("@id", abtest.Id.ToString());
-            }
-
+            string result = abTestsService.GetJSForUser(userId);
             return new JavaScriptResult(result);
         }
+
         [HttpGet("[action]")]
         public IActionResult RegisterPageviews(int pageviews, int id)
         {
-            using (var context = new ABContext())
-            {
-                var abtest = context.ABTests.FirstOrDefault(x => x.Id == id);
-                abtest.PageViews = pageviews;
-                context.SaveChanges();
-            }
+            var abTest = abTestsRepository.Get(id);
+            abTest.PageViews = pageviews;
+            abTestsRepository.Update(abTest);
             return Content("Pageviews updated");
         }
         [HttpGet("[action]")]
         public IActionResult Click(string state, int id)
         {
-            using (var context = new ABContext())
+            var abTest = abTestsRepository.Get(id);
+            switch (state)
             {
-                var abtest = context.ABTests.FirstOrDefault(x => x.Id == id);
-                switch (state)
-                {
-                    case "A": abtest.ClicksA++; break;
-                    case "B": abtest.ClicksB++; break;
-                }
-                context.SaveChanges();
+                case "A": abTest.ClicksA++; break;
+                case "B": abTest.ClicksB++; break;
             }
+            abTestsRepository.Update(abTest);
             return Content("Pageviews updated");
         }
 

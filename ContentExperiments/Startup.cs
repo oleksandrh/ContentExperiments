@@ -12,6 +12,9 @@ using Microsoft.EntityFrameworkCore;
 using ContentExperiments.WebUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using ContentExperiments.WebUI.Services;
+using ContentExperiments.WebUI.Repositories;
 
 namespace ContentExperiments
 {
@@ -35,8 +38,15 @@ namespace ContentExperiments
             // Add framework services.
             services.AddMvc();
             services.AddCors();
-            //services.AddEntityFrameworkSqlServer().AddDbContext<ABContext>(options =>
-            //    options.UseSqlServer(Configuration.GetConnectionString("ABTestingDatabase")));
+            services.AddDbContext<ABContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+               .AddEntityFrameworkStores<ABContext>()
+               .AddDefaultTokenProviders();
+            services.AddTransient<IEmailSender, AuthMessageSender>();
+            services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddTransient<IABTestsService, ABTestsService>();
+            services.AddTransient<IABTestsRepository, ABTestsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +69,8 @@ namespace ContentExperiments
             }
 
             app.UseStaticFiles();
+
+            app.UseIdentity();
 
             app.UseMvc(routes =>
             {

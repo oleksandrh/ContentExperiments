@@ -7,6 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { BlockUIModule } from 'ng-block-ui';
+import { FormsModule } from '@angular/forms';
 
 export const sharedConfig: NgModule = {
     bootstrap: [AppComponent],
@@ -25,6 +26,7 @@ export const sharedConfig: NgModule = {
             { path: 'fetch-data', component: FetchDataComponent },
             { path: '**', redirectTo: 'home' }
         ]),
-        BlockUIModule
+        BlockUIModule,
+        FormsModule
     ]
 };

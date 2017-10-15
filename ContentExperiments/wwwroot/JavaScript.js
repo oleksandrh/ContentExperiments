@@ -1,22 +1,28 @@
-﻿var selector = @selector;
-var htmlA = @htmlA;
-var htmlB = @htmlB;
-var pageviews = @pageviews;
-var id = @id;
+﻿var abTests = @abTests;
 var domain = "http://localhost:14255";
+var selectedAbTest;
 (function () {
-    pageviews++
-    if (pageviews % 2 == 0) {
-        $(selector).replaceWith(htmlB);
-    } else {
-        $(selector).replaceWith(htmlA);
-    }
-    $.get(domain + "/api/ABTest/RegisterPageviews?pageviews=" + pageviews + "&id=" + id);
-    $(document).on('click', selector, function () {
-        if (pageviews % 2 == 0) {
-            $.get(domain + "/api/ABTest/click?state=B&id=" + id);
-        } else {
-            $.get(domain + "/api/ABTest/click?state=A&id=" + id);
+    
+    for (var i = 0; i < abTests.length; i++) {
+        if (abTests[i].Url == window.location.href) {
+            selectedAbTest = abTests[i];
         }
-    });
+    }
+    if (selectedAbTest) {
+        selectedAbTest.PageViews++;
+        var stateB = (selectedAbTest.PageViews % 2 == 0);
+        if (stateB) {
+            $(selectedAbTest.Selector).replaceWith(selectedAbTest.HtmlB);
+        } else {
+            $(selectedAbTest.Selector).replaceWith(selectedAbTest.HtmlA);
+        }
+        $.get(domain + "/api/ABTest/RegisterPageviews?pageviews=" + selectedAbTest.PageViews + "&id=" + selectedAbTest.Id);
+        $(document).on('click', selectedAbTest.Selector.substring(0, selectedAbTest.Selector.indexOf("a") + 1), function () {
+            if (stateB) {
+                $.get(domain + "/api/ABTest/click?state=B&id=" + selectedAbTest.Id);
+            } else {
+                $.get(domain + "/api/ABTest/click?state=A&id=" + selectedAbTest.Id);
+            }
+        });
+    }
 })();

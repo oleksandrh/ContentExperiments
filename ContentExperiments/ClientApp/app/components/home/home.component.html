@@ -17,7 +17,7 @@
     <h1 *ngIf="modelB">Variation</h1>
     <div class="form-group" *ngIf="modelB">
         <label>Html:</label>
-        <textarea class="form-control">{{modelB.selectedElementHtml}}</textarea>
+        <textarea class="form-control" [(ngModel)]="modelB.selectedElementHtml"></textarea>
     </div>
     <input type="button" class="btn btn-success" value="Save" (click)="save(url.value)">
 </div>

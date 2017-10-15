@@ -8,9 +8,10 @@ using ContentExperiments.WebUI.Models;
 namespace ContentExperiments.WebUI.Migrations
 {
     [DbContext(typeof(ABContext))]
-    partial class ABContextModelSnapshot : ModelSnapshot
+    [Migration("20171015120457_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.3")
