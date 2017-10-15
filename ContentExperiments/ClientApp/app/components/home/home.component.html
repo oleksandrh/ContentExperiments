@@ -1,7 +1,29 @@
+<div class="row">
+    <div class="col-md-10">
+        <input type="url" #url class="form-control" placeholder="Page url">
+    </div>
+    <div class="col-md-2">
+        <input class="btn btn-default" type="button" value="Load" (click)="loadPage(url.value)" style="width:100%">
+    </div>
+    <br />
+    <div class="form-group" *ngIf="modelA">
+        <label>Selected element:</label>
+        <input type="text" class="form-control" [value]="modelA.selectedElementSelector" name="selectedElementSelector"/>
+    </div>
+    <div class="form-group" *ngIf="modelA">
+        <label>Html:</label>
+        <textarea class="form-control" readonly>{{modelA.selectedElementHtml}}</textarea>
+    </div>
+    <h1 *ngIf="modelB">Variation</h1>
+    <div class="form-group" *ngIf="modelB">
+        <label>Html:</label>
+        <textarea class="form-control">{{modelB.selectedElementHtml}}</textarea>
+    </div>
+    <input type="button" class="btn btn-success" value="Save" (click)="save(url.value)">
+</div>
 
-<input type="text" #url>
-<input type="button" value="Load" (click)="loadPage(url.value)">
-<div class="portlet box yellow blue" id="browser-portlet">
+
+<div class="portlet box yellow blue" id="browser-portlet" *ngIf="src">
     <div class="portlet-title">
         <div class="caption">
             <i class="fa fa-globe"></i>Page
@@ -26,7 +48,7 @@
     </div>
     <div class="portlet-body">
         <div *blockUI="'frame'">
-            <iframe *ngIf="src" style="width:100%;" height="600" [src]="src" (load)="onLoad()" #iframe></iframe>
+            <iframe style="width:100%;" height="600" [src]="src" (load)="onLoad()" #iframe></iframe>
         </div>
     </div>
 </div>

@@ -19,7 +19,7 @@ namespace ContentExperiments.Controllers
             try
             {
                 var uri = new Uri(url);
-                string domain = string.Format("{0}://{1}", uri.Scheme, uri.Host);
+                string domain = string.Format("{0}://{1}:{2}", uri.Scheme, uri.Host, uri.Port);
                 var handler = new HttpClientHandler();
                 var httpClient = new HttpClient(handler);
                 httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; rv:14.0) Gecko/20100101 Firefox/14.0.1");
