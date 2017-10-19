@@ -40,5 +40,11 @@ namespace ContentExperiments.WebUI.Repositories
         {
             context.SaveChanges();
         }
+        public void Remove(int id)
+        {
+            var abTest = abtestEntity.FirstOrDefault(x => x.Id == id);
+            context.ABTests.Remove(abTest);
+            context.SaveChanges();
+        }
     }
 }

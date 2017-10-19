@@ -8,6 +8,8 @@ using ContentExperiments.WebUI.Models;
 using Microsoft.AspNetCore.Cors;
 using ContentExperiments.WebUI.Repositories;
 using ContentExperiments.WebUI.Services;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace ContentExperiments.Controllers
 {
@@ -16,25 +18,40 @@ namespace ContentExperiments.Controllers
     {
         private readonly IABTestsService abTestsService;
         private readonly IABTestsRepository abTestsRepository;
-        public ABTestController(IABTestsService abTestsService, IABTestsRepository abTestsRepository)
+        private readonly UserManager<ApplicationUser> userManager;
+        public ABTestController(IABTestsService abTestsService, IABTestsRepository abTestsRepository, UserManager<ApplicationUser> userManager)
         {
             this.abTestsService = abTestsService;
             this.abTestsRepository = abTestsRepository;
+            this.userManager = userManager;
+        }
+        [HttpGet("[action]")]
+        public string GetScript(string userId)
+        {
+            return $"<script src='http://localhost:14255/api/abtest/getjs?userId={HttpContext.Session.GetString("UserId")}'></script>";
+        }
+        [HttpGet("[action]")]
+        public IEnumerable<ABTest> GetABTests()
+        {
+            return abTestsRepository.GetByUserId(HttpContext.Session.GetString("UserId"));
+        }
+        [HttpGet("[action]")]
+        public void Delete(int id)
+        {
+            abTestsRepository.Remove(id);
         }
         [HttpGet("[action]")]
         public JavaScriptResult GetJs(string userId)
         {
-            string result = abTestsService.GetJSForUser(userId);
-            return new JavaScriptResult(result);
+            return new JavaScriptResult(abTestsService.GetJSForUser(userId));
         }
 
         [HttpGet("[action]")]
-        public IActionResult RegisterPageviews(int pageviews, int id)
+        public void RegisterPageviews(int pageviews, int id)
         {
             var abTest = abTestsRepository.Get(id);
             abTest.PageViews = pageviews;
             abTestsRepository.Update(abTest);
-            return Content("Pageviews updated");
         }
         [HttpGet("[action]")]
         public IActionResult Click(string state, int id)

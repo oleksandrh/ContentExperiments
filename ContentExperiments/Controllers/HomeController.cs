@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Authorization;
 using ContentExperiments.WebUI.Repositories;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace ContentExperiments.Controllers
 {
@@ -30,6 +32,7 @@ namespace ContentExperiments.Controllers
         }
         public IActionResult Index()
         {
+            HttpContext.Session.SetString("UserId", userManager.GetUserAsync(HttpContext.User).Result.Id);
             return View();
         }
 

@@ -12,5 +12,6 @@ namespace ContentExperiments.WebUI.Repositories
         ABTest Get(int id);
         IEnumerable<ABTest> GetByUserId(string userId);
         IEnumerable<ABTest> GetAll();
+        void Remove(int id);
     }
 }

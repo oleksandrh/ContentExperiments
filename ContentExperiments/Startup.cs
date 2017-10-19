@@ -43,6 +43,8 @@ namespace ContentExperiments
             services.AddIdentity<ApplicationUser, IdentityRole>()
                .AddEntityFrameworkStores<ABContext>()
                .AddDefaultTokenProviders();
+            services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
+            services.AddSession();
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddTransient<IABTestsService, ABTestsService>();
@@ -71,7 +73,7 @@ namespace ContentExperiments
             app.UseStaticFiles();
 
             app.UseIdentity();
-
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

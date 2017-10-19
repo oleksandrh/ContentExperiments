@@ -6,22 +6,26 @@
         <input class="btn btn-default" type="button" value="Load" (click)="loadPage(url.value)" style="width:100%">
     </div>
     <br />
-    <div class="form-group" *ngIf="modelA">
-        <label>Selected element:</label>
-        <input type="text" class="form-control" [value]="modelA.selectedElementSelector" name="selectedElementSelector"/>
+    <div class="col-md-12">
+        <div class="form-group" *ngIf="modelA">
+            <label>Selected element:</label>
+            <input type="text" class="form-control" [value]="modelA.selectedElementSelector" name="selectedElementSelector" />
+        </div>
+        <div class="form-group" *ngIf="modelA">
+            <label>Html:</label>
+            <textarea class="form-control" readonly>{{modelA.selectedElementHtml}}</textarea>
+        </div>
+        <h1 *ngIf="modelB">Variation</h1>
+        <div class="form-group" *ngIf="modelB">
+            <label>Html:</label>
+            <textarea class="form-control" [(ngModel)]="modelB.selectedElementHtml"></textarea>
+        </div>
+        <div *ngIf="modelA">
+            <input type="button" class="btn btn-success pull-right" value="Save" (click)="save(url.value)">
+        </div>
     </div>
-    <div class="form-group" *ngIf="modelA">
-        <label>Html:</label>
-        <textarea class="form-control" readonly>{{modelA.selectedElementHtml}}</textarea>
-    </div>
-    <h1 *ngIf="modelB">Variation</h1>
-    <div class="form-group" *ngIf="modelB">
-        <label>Html:</label>
-        <textarea class="form-control" [(ngModel)]="modelB.selectedElementHtml"></textarea>
-    </div>
-    <input type="button" class="btn btn-success" value="Save" (click)="save(url.value)">
 </div>
-
+<br />
 
 <div class="portlet box yellow blue" id="browser-portlet" *ngIf="src">
     <div class="portlet-title">

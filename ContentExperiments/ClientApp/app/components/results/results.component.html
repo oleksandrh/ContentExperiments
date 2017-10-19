@@ -1,0 +1,44 @@
+<table class="table table-striped table-hover display" style="cellspacing:0;width:100%">
+    <thead>
+        <tr>
+            <th>Url</th>
+            <th>Pageviews</th>
+            <th>Clicks A</th>
+            <th>Clicks B</th>
+            <th>Selector</th>
+            <th>HTML A</th>
+            <th>HTML B</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let row of results">
+            <td>{{row.url}}</td>
+            <td>{{row.pageViews}}</td>
+            <td>{{row.clicksA}}</td>
+            <td>{{row.clicksB}}</td>
+            <td><a popover="{{row.selector}}" [popoverOnHover]="true"><span class="glyphicon glyphicon-info-sign"></span></a></td>
+            <td><a popover="{{row.htmlA}}" [popoverOnHover]="true"><span class="glyphicon glyphicon-info-sign"></span></a></td>
+            <td><a popover="{{row.htmlA}}" [popoverOnHover]="true"><span class="glyphicon glyphicon-info-sign"></span></a></td>
+            <td><a (click)="deleteRow(row.id)" style="cursor:pointer">Delete</a></td>
+        </tr>
+    </tbody>
+</table> 
+
+        <!--<div class="form-group">
+            <label for="email">Url:</label>
+            <input type="email" class="form-control" [(ngModel)]="selectedABTest.url">
+        </div>
+        <div class="form-group">
+            <label for="pwd">Selector:</label>
+            <input type="text" class="form-control" [(ngModel)]="selectedABTest.selector">
+        </div>
+        <div class="form-group">
+            <label for="pwd">HtmlA:</label>
+            <textarea class="form-control" [(ngModel)]="selectedABTest.htmlA" readonly></textarea>
+        </div>
+        <div class="form-group">
+            <label for="pwd">HtmlB:</label>
+            <textarea class="form-control" [(ngModel)]="selectedABTest.htmlB"></textarea>
+        </div>-->

@@ -4,6 +4,7 @@ import * as $ from 'jquery';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { Http } from '@angular/http';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'home',
@@ -21,7 +22,7 @@ export class HomeComponent {
     @BlockUI('frame') blockIFrame: NgBlockUI;
 
 
-    constructor(private sanitizer: DomSanitizer, public zone: NgZone, public http: Http) {
+    constructor(private sanitizer: DomSanitizer, public zone: NgZone, public http: Http, private router: Router) {
         this.sanitizerLocal = sanitizer;
     }
     loadPage(url: String) {
@@ -89,7 +90,7 @@ export class HomeComponent {
     }
     save(url: String) {
         $.post("/home/save", { selector: this.modelA.selectedElementSelector, modelA: this.modelA.selectedElementHtml, modelB: this.modelB.selectedElementHtml, url: url }).done(r => {})
-        //this.http.post("/home/save", JSON.stringify({ modelA: this.modelA, modelB: this.modelB, page: url })).subscribe(r => { });
+        this.router.navigate(['/scripts']);
     }
     getSpecificPath(elem) {
         if (elem.length != 1) throw 'Requires one element.';
