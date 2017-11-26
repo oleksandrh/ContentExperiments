@@ -10,6 +10,7 @@ using ContentExperiments.WebUI.Repositories;
 using ContentExperiments.WebUI.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
+using ContentExperiments.WebUI.Models.Entities;
 
 namespace ContentExperiments.Controllers
 {

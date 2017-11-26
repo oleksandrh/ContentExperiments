@@ -16,11 +16,11 @@
         <tr *ngFor="let row of results">
             <td>{{row.url}}</td>
             <td>{{row.pageViews}}</td>
-            <td>{{row.clicksA}}</td>
-            <td>{{row.clicksB}}</td>
+            <td [ngClass]="row.clicksA>row.clicksB?'border-red':''">{{row.clicksA}}</td>
+            <td [ngClass]="row.clicksA<row.clicksB?'border-red':''">{{row.clicksB}}</td>
             <td><a popover="{{row.selector}}" [popoverOnHover]="true"><span class="glyphicon glyphicon-info-sign"></span></a></td>
             <td><a popover="{{row.htmlA}}" [popoverOnHover]="true"><span class="glyphicon glyphicon-info-sign"></span></a></td>
-            <td><a popover="{{row.htmlA}}" [popoverOnHover]="true"><span class="glyphicon glyphicon-info-sign"></span></a></td>
+            <td><a popover="{{row.htmlB}}" [popoverOnHover]="true"><span class="glyphicon glyphicon-info-sign"></span></a></td>
             <td><a (click)="deleteRow(row.id)" style="cursor:pointer">Delete</a></td>
         </tr>
     </tbody>

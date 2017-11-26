@@ -1,4 +1,5 @@
 ﻿using ContentExperiments.WebUI.Models;
+using ContentExperiments.WebUI.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

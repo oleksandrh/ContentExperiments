@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using ContentExperiments.WebUI.Models.Entities;
 
 namespace ContentExperiments.Controllers
 {
